@@ -1,7 +1,9 @@
 ﻿# RippleView
 按钮的波纹效果
+
 ![image](https://github.com/yfchu/RippleView/blob/master/apk/2.gif)   
 ```xml
+		//xml
 		<com.yfchu.app.customview.RippleView
         android:layout_width="200dp"
         android:layout_height="100dp"
@@ -12,6 +14,7 @@
 ```
 
 ```xml
+	//attrs
 	<declare-styleable name="RippleView">
         <attr name="ripple_color" format="color"/>
         <attr name="ripple_alpha" format="float"/>
