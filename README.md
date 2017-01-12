@@ -24,52 +24,33 @@
 ```java  
 	@Override
     public boolean onTouchEvent(MotionEvent event) {
+        mDownX = event.getX();
+        mDownY = event.getY();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mPaint.setAlpha(100);
-                mDownX = event.getX();
-                mDownY = event.getY();
                 setmRadius(dp(50));
                 break;
             case MotionEvent.ACTION_MOVE:
-                mDownX = event.getX();
-                mDownY = event.getY();
                 setmRadius(dp(50));
                 break;
             case MotionEvent.ACTION_UP:
-                mDownX = event.getX();
-                mDownY = event.getY();
                 ValueAnimator valueAnimator = ValueAnimator.ofFloat(mRadius, getWidth());
-                valueAnimator.setDuration(500).start();
+                valueAnimator.setDuration(300).start();
                 valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator valueAnimator) {
                         mRadius = (float) valueAnimator.getAnimatedValue();
-                        if (mPaint.getAlpha() >= 5)
-                            mPaint.setAlpha(mPaint.getAlpha() - 5);
                         invalidate();
                     }
                 });
-                valueAnimator.addListener(new Animator.AnimatorListener() {
+                ValueAnimator valueAnimator1 = ValueAnimator.ofInt(mPaint.getAlpha(), 0);
+                valueAnimator1.setDuration(300).start();
+                valueAnimator1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
-                    public void onAnimationStart(Animator animator) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animator) {
-                        mPaint.setAlpha(0);
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        mPaint.setAlpha((Integer) valueAnimator.getAnimatedValue());
                         invalidate();
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animator) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animator) {
-
                     }
                 });
                 break;
